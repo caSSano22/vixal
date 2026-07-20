@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 800px;
+      height: 800px;
+      background: #040405;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+    .glow {
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(0, 200, 5, 0.25) 0%, rgba(0, 212, 255, 0.12) 40%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <svg width="520" height="520" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; z-index: 10; filter: drop-shadow(0 0 45px rgba(0, 200, 5, 0.45));">
+    <defs>
+      <linearGradient id="v-green" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00FF66"/>
+        <stop offset="50%" stop-color="#00C805"/>
+        <stop offset="100%" stop-color="#008003"/>
+      </linearGradient>
+      <linearGradient id="v-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00F0FF"/>
+        <stop offset="100%" stop-color="#0088FF"/>
+      </linearGradient>
+      <linearGradient id="v-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#12151C"/>
+        <stop offset="100%" stop-color="#050608"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Outer Squircle Badge -->
+    <rect x="20" y="20" width="472" height="472" rx="118" fill="url(#v-bg)" stroke="rgba(255, 255, 255, 0.18)" stroke-width="8"/>
+    <rect x="28" y="28" width="456" height="456" rx="110" fill="none" stroke="rgba(0, 200, 5, 0.4)" stroke-width="4"/>
+
+    <!-- Geometric Wings -->
+    <path d="M 130 140 L 214 140 L 256 348 L 200 348 Z" fill="url(#v-green)"/>
+    <path d="M 382 140 L 298 140 L 256 348 L 312 348 Z" fill="url(#v-cyan)"/>
+
+    <!-- Center Prism -->
+    <path d="M 256 160 L 290 140 L 256 380 L 222 140 Z" fill="#FFFFFF" opacity="0.95"/>
+
+    <!-- Intelligence Node -->
+    <circle cx="256" cy="230" r="32" fill="#040405" stroke="url(#v-green)" stroke-width="6"/>
+    <circle cx="256" cy="230" r="18" fill="#00FF66"/>
+    <circle cx="256" cy="230" r="8" fill="#FFFFFF"/>
+
+    <!-- Vertices -->
+    <circle cx="130" cy="140" r="14" fill="#00FF66"/>
+    <circle cx="382" cy="140" r="14" fill="#00F0FF"/>
+    <circle cx="256" cy="380" r="16" fill="#00C805"/>
+  </svg>
+</body>
+</html>
