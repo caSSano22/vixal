@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     description: "The Bloomberg Terminal of tokenized finance. Built on Robinhood Chain.",
   },
   robots: { index: true, follow: true },
+  other: {
+    "virtual-protocol-site-verification": "6aa5aef64fe2084a99cff804deb4a395",
+  },
 };
 
 export default function RootLayout({
@@ -46,6 +49,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <meta name="virtual-protocol-site-verification" content="6aa5aef64fe2084a99cff804deb4a395" />
+      </head>
       <body className={`${inter.variable} font-sans bg-bg-primary text-white antialiased`}>
         {children}
       </body>
