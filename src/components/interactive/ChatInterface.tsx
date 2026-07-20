@@ -11,12 +11,22 @@ interface ChatInterfaceProps {
 function TypingIndicator() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      className="flex justify-start"
+      style={{ display: "flex", justifyContent: "flex-start", marginBottom: "16px" }}
     >
-      <div className="bg-bg-surface border border-white/[0.08] px-4 py-3 rounded-2xl flex items-center gap-1.5">
+      <div
+        style={{
+          background: "rgba(255, 255, 255, 0.04)",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          padding: "12px 18px",
+          borderRadius: "18px 18px 18px 4px",
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+        }}
+      >
         <span className="typing-dot" />
         <span className="typing-dot" />
         <span className="typing-dot" />
@@ -26,27 +36,60 @@ function TypingIndicator() {
 }
 
 function Message({ msg }: { msg: ChatMessageData }) {
+  const isUser = msg.role === "user";
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+      style={{
+        display: "flex",
+        justifyContent: isUser ? "flex-end" : "flex-start",
+        marginBottom: "16px",
+      }}
     >
       <div
-        className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
-          msg.role === "user"
-            ? "bg-[#00C805]/10 border border-[#00C805]/20 text-white"
-            : "bg-bg-surface border border-white/[0.08] text-[#9CA3AF]"
-        }`}
+        style={{
+          maxWidth: "82%",
+          padding: "13px 18px",
+          borderRadius: isUser ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
+          fontSize: "14px",
+          lineHeight: "1.65",
+          background: isUser
+            ? "rgba(0, 200, 5, 0.12)"
+            : "rgba(255, 255, 255, 0.035)",
+          border: isUser
+            ? "1px solid rgba(0, 200, 5, 0.28)"
+            : "1px solid rgba(255, 255, 255, 0.08)",
+          color: isUser ? "#FFFFFF" : "#D1D5DB",
+          boxShadow: isUser
+            ? "0 4px 20px rgba(0,200,5,0.12)"
+            : "0 4px 20px rgba(0,0,0,0.3)",
+        }}
       >
         {msg.content}
         {msg.chips && msg.chips.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mt-3">
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "6px",
+              marginTop: "12px",
+            }}
+          >
             {msg.chips.map((chip) => (
               <span
                 key={chip}
-                className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#00C805]/10 text-[#00C805] border border-[#00C805]/20"
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  padding: "3px 10px",
+                  borderRadius: "100px",
+                  background: "rgba(0, 200, 5, 0.15)",
+                  color: "#00FF66",
+                  border: "1px solid rgba(0, 200, 5, 0.3)",
+                  letterSpacing: "-0.01em",
+                }}
               >
                 {chip}
               </span>
@@ -86,7 +129,7 @@ export function ChatInterface({ messages }: ChatInterfaceProps) {
           setIdx((i) => i + 1);
         }, 1800);
       }
-    }, 2500);
+    }, 2800);
 
     return () => clearInterval(timer);
   }, [idx, messages]);
@@ -98,24 +141,94 @@ export function ChatInterface({ messages }: ChatInterfaceProps) {
   }, [displayed, showTyping]);
 
   return (
-    <div className="relative glass border border-white/[0.08] rounded-[24px] overflow-hidden">
+    <div
+      style={{
+        position: "relative",
+        background: "linear-gradient(145deg, #12141A 0%, #0B0C10 100%)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+        borderRadius: "24px",
+        overflow: "hidden",
+        boxShadow: "0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 20px 60px rgba(0, 0, 0, 0.55)",
+      }}
+    >
       {/* Header */}
-      <div className="flex items-center gap-3 px-5 py-4 border-b border-white/[0.06]">
-        <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#00C805] to-[#00A804] flex items-center justify-center flex-shrink-0">
-          <Bot size={18} className="text-black" />
-          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#00C805] border-2 border-bg-surface" />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          padding: "16px 20px",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.07)",
+          background: "rgba(22, 24, 30, 0.7)",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            width: 36,
+            height: 36,
+            borderRadius: "12px",
+            background: "linear-gradient(135deg, #00FF66, #00C805)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            boxShadow: "0 0 16px rgba(0,200,5,0.35)",
+          }}
+        >
+          <Bot size={18} style={{ color: "#000000" }} />
+          <div
+            style={{
+              position: "absolute",
+              bottom: -1,
+              right: -1,
+              width: 10,
+              height: 10,
+              borderRadius: "50%",
+              background: "#00C805",
+              border: "2px solid #0B0C10",
+            }}
+          />
         </div>
         <div>
-          <div className="text-white font-semibold text-sm">VIXAL AI Agent</div>
-          <div className="text-[#00C805] text-xs flex items-center gap-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#00C805] animate-pulse" />
+          <div style={{ color: "#FFFFFF", fontWeight: 700, fontSize: "14px", letterSpacing: "-0.01em" }}>
+            VIXAL AI Agent
+          </div>
+          <div
+            style={{
+              color: "#00C805",
+              fontSize: "12px",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              fontWeight: 500,
+            }}
+          >
+            <span
+              className="pulse-green"
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: "#00C805",
+                display: "inline-block",
+              }}
+            />
             Active — Processing live data
           </div>
         </div>
       </div>
 
       {/* Messages */}
-      <div ref={scrollRef} className="p-5 space-y-4 min-h-[340px] max-h-[380px] overflow-y-auto">
+      <div
+        ref={scrollRef}
+        style={{
+          padding: "20px",
+          minHeight: "340px",
+          maxHeight: "380px",
+          overflowY: "auto",
+        }}
+      >
         <AnimatePresence initial={false}>
           {displayed.map((msg) => (
             <Message key={msg.id} msg={msg} />
@@ -124,17 +237,49 @@ export function ChatInterface({ messages }: ChatInterfaceProps) {
         </AnimatePresence>
       </div>
 
-      {/* Input */}
-      <div className="px-5 pb-5">
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-bg-surface border border-white/[0.08]">
+      {/* Input bar */}
+      <div style={{ padding: "0 20px 20px 20px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            padding: "10px 14px",
+            borderRadius: "14px",
+            background: "rgba(255, 255, 255, 0.03)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+          }}
+        >
           <input
             type="text"
             placeholder="Ask about your assets..."
-            className="flex-1 bg-transparent text-white text-sm placeholder-[#6B7280] outline-none"
             readOnly
+            style={{
+              flex: 1,
+              background: "transparent",
+              border: "none",
+              color: "#FFFFFF",
+              fontSize: "14px",
+              outline: "none",
+              fontFamily: "inherit",
+            }}
           />
-          <button className="w-8 h-8 rounded-lg bg-[#00C805] flex items-center justify-center flex-shrink-0 hover:bg-[#00A804] transition-colors">
-            <Send size={14} className="text-black" />
+          <button
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: "10px",
+              background: "linear-gradient(135deg, #00FF66, #00C805)",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              flexShrink: 0,
+              boxShadow: "0 0 12px rgba(0,200,5,0.3)",
+            }}
+          >
+            <Send size={14} style={{ color: "#000000" }} />
           </button>
         </div>
       </div>
