@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   other: {
-    "virtual-protocol-site-verification": "6aa5aef64fe2084a99cff804deb4a395",
+    "virtual-protocol-site-verification": "8e1147b3110dd0cf9cd1ae86e34362fd",
   },
 };
 
@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta name="virtual-protocol-site-verification" content="6aa5aef64fe2084a99cff804deb4a395" />
+        <meta name="virtual-protocol-site-verification" content="8e1147b3110dd0cf9cd1ae86e34362fd" />
       </head>
       <body className={`${inter.variable} font-sans bg-bg-primary text-white antialiased`}>
         {children}
